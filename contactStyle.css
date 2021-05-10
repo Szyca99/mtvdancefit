@@ -1,5 +1,5 @@
 body.custom-background {
-    background-image: url(/Images/foto1.jpg);
+    background-image: url(./Images/foto1.jpg);
     background-size: cover;
 }
 
@@ -13,8 +13,6 @@ body.custom-background {
     flex-direction: column;
     /* background: #ddd; */
     background: rgba(17, 17, 49, 0.7);
-    
-    /* background: rgb(0, 0, 0, 0.8); */
 }
 
 
@@ -55,10 +53,6 @@ body.custom-background {
     padding: 20px 20px ;
     display: flex;
     transition: .5s;
-    /* background: rgb(0,0,0,0.55);
-    margin: 5px;
-    border-radius: 10px;
-     */
 }
 
 .container .contact-info .box .icon { 
@@ -229,6 +223,3 @@ body.custom-background {
     transition: 1s;
 }
 
-/* .footer__container { 
-    margin-top: 50%    ;
-} */

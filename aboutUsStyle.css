@@ -1,10 +1,6 @@
 
 		body{
-			/* background: #202020 !important;
-			font-family: tahoma;
-			text-align: justify;
-			overflow: hidden; */
-            background-image: url(/Images/foto1.jpg);
+            background-image: url(./Images/foto1.jpg);
             background-size: cover;
 		}
 	 
@@ -14,26 +10,7 @@
             background: rgba(17, 17, 49, 0.7);
 		}
 	 
-		/* #about .triangle-right{
-			margin-top: 95px;
-			width: 0;
-			height: 0;
-			border-top: 259px solid transparent;
-			border-left: 470px solid #d6c6b2;
-			border-bottom: 259px solid transparent;
-		} */
-	 
-		/* #about .triangle-right img{
-			position: absolute;
-			left: -1px;
-			top: 81px;
-			width: 74%;
-		}
-	  */
-		/* .fa-play{
-			font-size: 100px;
-			
-		} */
+
 		
 		
 		#about .p-first{
@@ -71,11 +48,9 @@
 			border-radius: 50%;
 			line-height: 50px;
 			text-align: center;
-			/* border: 1px solid #d6c6b2; */
 			border: 1px solid #ffffff;
 			margin-right: 10px;
 			font-size: 22px;
-			/* color: #d6c6b2; */
             color: #fff ;
 			transition: all .3s;
 			
@@ -152,9 +127,6 @@
 
 		@media only screen and (max-width: 1200px) {
 			
-			/* .row1  p { 
-				margin-top: auto;
-			} */
 			
 		.about__img { 
 			height: 300px;
@@ -169,11 +141,6 @@
 		.heading {
 			margin-left: 30px;
 		} 
-
-		/* #about{
-			padding-top: 0px;
-			padding-bottom: 0px;
-		} */
 		}
 
 
@@ -209,14 +176,11 @@
 	}
 
   .team__container {
-	/* margin: 20px 40px; */
 	color: white;
-	/* background: #12172b; */
 	font-family: "Poppins", sans-serif;
   }
   
   .heading {
-	/* font-size: 60px;     */
 	font-size: 36px;
     font-weight: 500;
 	color: white;
@@ -232,7 +196,6 @@
   .profiles {
 	display: flex;
 	justify-content: space-around;
-	/* margin: 20px 80px; */
   }
   
   .profile {
@@ -251,10 +214,7 @@
 	height: 260px;
 	width: 260px;
 	border-radius: 50%;
-	/* filter: grayscale(100%); */
-	/* cursor: pointer; */
 	transition: 400ms;
-	/* object-position: center; */
 	object-fit: cover;
 	
   }
@@ -278,7 +238,6 @@
   .profile p {
 	font-size: 16px;
 	margin-top: 20px;
-	/* text-align: justify; */
   }
   
   @media only screen and (max-width: 1150px) {
