@@ -7,7 +7,7 @@
   }
 
   body.custom-background {
-    background-image: url("/images/background-main.jpg");
+    background-image: url("./Images/background-main.jpg");
     background-position: center top;
     background-size: auto;
     background-repeat: repeat;
