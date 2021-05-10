@@ -1,0 +1,234 @@
+body.custom-background {
+    background-image: url(/Images/foto1.jpg);
+    background-size: cover;
+}
+
+.contact { 
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* background: #ddd; */
+    background: rgba(17, 17, 49, 0.7);
+    
+    /* background: rgb(0, 0, 0, 0.8); */
+}
+
+
+.contact .content { 
+    max-width: 800px;
+    text-align: center;
+}
+
+.contact .content h2 {
+    font-size: 36px;
+    font-weight: 500;
+    color: #fff;
+}
+
+
+.contact .content p {
+    font-weight: 300;
+    color: #fff;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.container .contact-info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container .contact-info .box {
+    position: relative;
+    padding: 20px 20px ;
+    display: flex;
+    transition: .5s;
+    /* background: rgb(0,0,0,0.55);
+    margin: 5px;
+    border-radius: 10px;
+     */
+}
+
+.container .contact-info .box .icon { 
+    min-width: 60px;
+    height: 60px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 22px;
+}
+
+.container .contact-info .box .text {
+    display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #fff;
+    flex-direction: column;
+    font-weight: 300;
+}
+
+.container .contact-info .box .text {
+    font-weight: 500;
+    color: #00bcd4;
+}
+
+.container .contact-info .box .text p {
+    color: #fff;
+}
+
+.contact-form {
+    width: 40%;
+    padding: 40px;
+    background: #fff;
+}
+
+.contact-form h2 {
+    font-size: 30px;
+    color: #333;
+    font-weight: 500;
+}
+
+.contact-form .input-box {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+.contact-form .input-box input,
+.contact-form .input-box textarea {
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    resize: none;
+}
+
+.contact-form .input-box span {
+    position: absolute;
+    left: 0;
+    padding: 5px 0 ;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #666;
+}
+
+.box:hover {
+    background:rgba(17, 17, 49, 0.7);
+    transition: .5s;
+}
+
+.contact-form .input-box input:valid ~ span, 
+.contact-form .input-box input:focus ~ span, 
+.contact-form .input-box textarea:valid ~ span,
+.contact-form .input-box textarea:focus ~ span { 
+    color: #e91e63;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+ 
+
+.contact-form .input-box input[type="submit"] {
+    width: 100px;
+    background: #00bcd4;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+
+
+.contact-form .input-box button[type="submit"] {
+    width: 100px;
+    background: #00bcd4;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+
+
+
+@media (max-width: 1040px) {
+    .contact {
+        padding: 50px;
+    }
+    
+    .container{
+        flex-direction: column;
+    }
+
+    .container .contact-info {
+        margin-bottom: 40px;
+    }
+
+    .container .contact-info,
+    .contact-form {
+        width: 100%;
+    }
+
+    .input-box { 
+        min-width: 130px;
+    }
+
+    
+}
+
+
+
+
+.contact .info  {
+    text-align: left;
+    display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #fff;
+    flex-direction: column;
+    /* font-weight: 300; */
+    font-weight: 500;
+    width: 100%;
+    margin-top: 50px;
+    color: #00bcd4;
+    transition: 1s;
+}
+
+.info p { 
+    font-weight: 300;
+    color: #fff;
+}
+
+.contact .info:hover { 
+    background:rgba(17, 17, 49, 0.7);
+    width: 110%;
+    transition: 1s;
+    padding: 10px;
+}
+
+.contact .info::after {
+    transition: 1s;
+}
+
+/* .footer__container { 
+    margin-top: 50%    ;
+} */
