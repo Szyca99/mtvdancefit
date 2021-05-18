@@ -13,6 +13,7 @@ body.custom-background {
     flex-direction: column;
     /* background: #ddd; */
     background: rgba(17, 17, 49, 0.7);
+    margin-top: 80px;
 }
 
 

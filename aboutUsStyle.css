@@ -11,7 +11,9 @@
 		}
 	 
 
-		
+		.container { 
+			margin-top: 80px;
+		}
 		
 		#about .p-first{
 			margin-bottom: 30px;

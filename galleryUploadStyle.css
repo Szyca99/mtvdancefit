@@ -1,0 +1,31 @@
+.gallery-upload { 
+    text-align: center;
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+    width: 430px;
+    height: 500px;
+    background-color: #ddd;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px 80px;
+    margin-top: 50px ;
+    /* margin-bottom: 50px; */
+    border: none;
+    border-radius: 15px;
+}
+
+.gallery-upload input {
+    margin: 10px;
+    border:solid lightseagreen 2px;
+    border-radius: 5px  ;
+}
+
+.gallery-upload button { 
+    /* border: none; */
+    border-radius: 10px;
+    background: rgb(56, 175, 255);
+    width: 150px;
+    height: 40px;
+    margin: 50px;
+}
