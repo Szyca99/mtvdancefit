@@ -174,8 +174,8 @@ session_start();
 
 
                 echo '<div class=" col-sm-6 col-md-3 mb-3 item">
-                            <a href="Images/gallery/' . $row["imgFullNameGallery"] . '"; class="fancybox" data-fancybox="gallery1">
-                        <img src="Images/gallery/' . $row["imgFullNameGallery"] . '" width="100%" height="100%" alt="">
+                            <a href="./Images/gallery/' . $row["imgFullNameGallery"] . '"; class="fancybox" data-fancybox="gallery1">
+                        <img src="./Images/gallery/' . $row["imgFullNameGallery"] . '" width="100%" height="100%" alt="">
                         <h3>' . $row["titleGallery"] . '</h3>
                         <p> ' . $row["descGallery"] . '</p> 
                     </a>
@@ -198,7 +198,7 @@ session_start();
         if ($_SESSION['username']=='Admin') {
             echo '<div class="gallery-upload">
         <h2>Upload Image</h2>
-        <form action="includes/gallery-upload.inc.php" method="POST" enctype="multipart/form-data">
+        <form action="./includes/gallery-upload.inc.php" method="POST" enctype="multipart/form-data">
             <input type="text" name="filename" placeholder="File name...">
             <input type="text" name="filetitle" placeholder="Image title...">
             <input type="text" name="filedesc" placeholder="Image description...">
