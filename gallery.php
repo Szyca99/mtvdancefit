@@ -1,5 +1,5 @@
 <?php 
-
+include './includes/dbh.inc.php';
 // session_destroy();
 session_start();
 
@@ -162,7 +162,8 @@ session_start();
             // function to connect and execute the query
             function filterTable($query)
             {
-                $connect = mysqli_connect("host", "user", "pass", "heroku_e6899dd139aa65d");
+                $connect = mysqli_connect("host", "user", "pass", "path");
+                // $connect = mysqli_connect("host", "user", "pass", "heroku_e6899dd139aa65d");
                 $filter_Result = mysqli_query($connect, $query);
                 return $filter_Result;
             }
