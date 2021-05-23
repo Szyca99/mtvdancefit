@@ -1,5 +1,9 @@
-<?php
-$_SESSION['username'] = "Admin";
+<?php 
+
+// session_destroy();
+session_start();
+
+
 ?>
 
 
@@ -41,17 +45,7 @@ $_SESSION['username'] = "Admin";
     <!-- Galerry Section  -->
 </head>
 
-<script>
-    $(document).ready(function() {
-        $("#myinput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#card div").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
 
-            });
-        });
-    });
-</script>
 
 <body class="custom-background">
 
@@ -84,11 +78,22 @@ $_SESSION['username'] = "Admin";
                 <li class="navbar__btn">
                     <a href="./contact.html" class="navbar__links" id="services-page">Kontakt</a>
                 </li>
-                <!-- 
+                
                 <li class="navbar__btn">
-                    <a href="#sign-up" class="button" id="signup">Wyszukaj</a>
-                </li> -->
+                    <a href="./login.php" class="button" id="signup">Zaloguj</a>
+                </li>
 
+                <?php   
+                
+                if(isset($_SESSION['username'])){
+                  echo   '<li class="navbar__btn">
+                    <a href="./login.php" class="navbar__links" name="logout" id="services-page">Wyloguj się </a>
+                </li>';
+                    if(isset($_POST['logout'])){
+                session_destroy();
+                    }
+                }   
+                ?>
             </ul>
         </div>
     </nav>
@@ -108,33 +113,79 @@ $_SESSION['username'] = "Admin";
         <div class="cointainer-search">
             <div class="row">
                 <div class="col-md-12 search">
-                    <input type="text" placeholder="Szukaj" class="form-control">
+                    <form method="POST">
+                        <!-- <label style="color:white;">Szukaj</label> -->
+                        <?php
+                        if (isset($_POST['search'])) {
+                            $valueToSearch = $_POST['valueToSearch'];
+                            echo '<p style="color:white;" > Szukana fraza to:    ' . $valueToSearch . ' </p>';
+                        }
+                        ?>
+                        <input type="text" name="valueToSearch" placeholder="Szukaj" class="form-control"><br>
+                        <input type="submit" name="search" value="Szukaj" class="btn btn-primary submit">
+                        <a href="./gallery.php" class="btn btn-light">Wyczyść</a>
+
+                    </form>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
         <div class="row mt-3">
+
             <?php
-            include_once 'includes/dbh.inc.php';
 
-            $sql = "SELECT * FROM gallery ORDER BY orderGallery DESC";
-            $stmt = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($stmt, $sql)) {
-                echo 'SQL statement failed!';
+            // if (isset($_POST['clear-search'])) {
+            //     $query = "SELECT * FROM `gallery`";
+            //     $search_result = filterTable($query);
+            // }
+
+            if (isset($_POST['search'])) {
+                $valueToSearch = $_POST['valueToSearch'];
+                // search in all table columns
+                // using concat mysql function
+                $query = "SELECT * FROM `gallery` WHERE CONCAT(`titleGallery`, `descGallery`) LIKE '%" . $valueToSearch . "%' ORDER BY orderGallery DESC";
+                $search_result = filterTable($query);
             } else {
-                mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
+                $query = "SELECT * FROM `gallery` ORDER BY orderGallery DESC";
+                $search_result = filterTable($query);
+            }
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class=" col-sm-6 col-md-3 mb-3 item">
-                    <a href="Images/gallery/' . $row["imgFullNameGallery"] . '"; class="fancybox" data-fancybox="gallery1">
+            // function to connect and execute the query
+            function filterTable($query)
+            {
+                $connect = mysqli_connect("localhost", "root", "", "mtvdancefit");
+                $filter_Result = mysqli_query($connect, $query);
+                return $filter_Result;
+            }
+
+            ?>
+
+            <!-- populate table from mysql database -->
+            <?php while ($row = mysqli_fetch_array($search_result)) :
+
+
+                echo '<div class=" col-sm-6 col-md-3 mb-3 item">
+                            <a href="Images/gallery/' . $row["imgFullNameGallery"] . '"; class="fancybox" data-fancybox="gallery1">
                         <img src="Images/gallery/' . $row["imgFullNameGallery"] . '" width="100%" height="100%" alt="">
                         <h3>' . $row["titleGallery"] . '</h3>
                         <p> ' . $row["descGallery"] . '</p> 
                     </a>
                 </div>';
-                }
-            }
+            endwhile;
             ?>
+
+
+
+
         </div>
 
         <!-- Gallery Section   -->
@@ -143,7 +194,8 @@ $_SESSION['username'] = "Admin";
 
         <!-- Upload Section  -->
         <?php
-        if (isset($_SESSION['username'])) {
+        if(isset($_SESSION['username'])){
+        if ($_SESSION['username']=='Admin') {
             echo '<div class="gallery-upload">
         <h2>Upload Image</h2>
         <form action="includes/gallery-upload.inc.php" method="POST" enctype="multipart/form-data">
@@ -154,7 +206,7 @@ $_SESSION['username'] = "Admin";
             <button type="submit" name="submit">UPLOAD</button>
         </form>
         </div>';
-        }
+        }}
 
         ?>
         <!-- End of upload Section  -->

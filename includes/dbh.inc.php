@@ -1,11 +1,14 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "";
+$user = "root";
+$pass = "";
 $dbname = "mtvdancefit";
 $servername = "localhost";
 
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $user, $pass, $dbname);
 
+if(!$conn) {
+    die( "<script>alert('Connection Failed')</script>");
+}
