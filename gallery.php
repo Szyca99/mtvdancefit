@@ -162,9 +162,10 @@ session_start();
             // function to connect and execute the query
             function filterTable($query)
             {
-                $connect = mysqli_connect("host", "user", "pass", "path");
+                include './includes/dbh.inc.php';
+                // $connect = mysqli_connect("host", "user", "pass", "path");
                 // $connect = mysqli_connect("host", "user", "pass", "heroku_e6899dd139aa65d");
-                $filter_Result = mysqli_query($connect, $query);
+                $filter_Result = mysqli_query($conn, $query);
                 return $filter_Result;
             }
 
