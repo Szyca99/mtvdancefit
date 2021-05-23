@@ -48,6 +48,7 @@ if (isset($_POST['submit'])) {
 <body>
 
 <div class="container">
+	<a href="./index.html">Wróć do strony głównej!</a>
 		<form action="" method="POST" class="login-email">
 			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
 			<div class="input-group">

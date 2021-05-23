@@ -1,0 +1,10 @@
+mysql://b97b03f8136a9c:2436b5a9@eu-cdbr-west-01.cleardb.com/heroku_e6899dd139aa65d?reconnect=true
+
+UN: b97b03f8136a9c
+
+PW: 2436b5a9
+
+HOST: eu-cdbr-west-01.cleardb.com
+
+
+DBName: heroku_e6899dd139aa65d
