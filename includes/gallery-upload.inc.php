@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         if($fileError === 0) {
             if($fileSize < 2000000) {
                 $imageFullName = $newFileName.".".uniqid("", true).".".$fileActualExt;
-                $fileDestination = "../Images/gallery/". $imageFullName;
+                $fileDestination = "./Images/gallery/". $imageFullName;
 
                 include_once "dbh.inc.php";
 
