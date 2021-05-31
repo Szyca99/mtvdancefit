@@ -1,4 +1,4 @@
-<?php 
+<?php
 include './includes/dbh.inc.php';
 // session_destroy();
 session_start();
@@ -52,7 +52,7 @@ session_start();
     <!-- Navbar Section -->
     <nav class="navbar">
         <div class="navbar__container">
-        <a href="./index.html" id="navbar__logo">MTV DANCE FIT</a>
+            <a href="./index.html" id="navbar__logo">MTV DANCE FIT</a>
             <div class="navbar__toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -78,21 +78,21 @@ session_start();
                 <li class="navbar__btn">
                     <a href="./contact.html" class="navbar__links" id="services-page">Kontakt</a>
                 </li>
-                
+
                 <li class="navbar__btn">
                     <a href="./login.php" class="button" id="signup">Zaloguj</a>
                 </li>
 
-                <?php   
-                
-                if(isset($_SESSION['username'])){
-                  echo   '<li class="navbar__btn">
+                <?php
+
+                if (isset($_SESSION['username'])) {
+                    echo   '<li class="navbar__btn">
                     <a href="./login.php" class="navbar__links" name="logout" id="services-page">Wyloguj się </a>
                 </li>';
-                    if(isset($_POST['logout'])){
-                session_destroy();
+                    if (isset($_POST['logout'])) {
+                        session_destroy();
                     }
-                }   
+                }
                 ?>
             </ul>
         </div>
@@ -113,18 +113,39 @@ session_start();
         <div class="cointainer-search">
             <div class="row">
                 <div class="col-md-12 search">
-                    <form method="POST">
-                        <!-- <label style="color:white;">Szukaj</label> -->
+                    <form class="search-form" method="POST">
                         <?php
                         if (isset($_POST['search'])) {
-                            $valueToSearch = $_POST['valueToSearch'];
-                            echo '<p style="color:white;" > Szukana fraza to:    ' . $valueToSearch . ' </p>';
+
+                            if (isset($_POST['date-order'])) {
+                                $valueToSearch = $_POST['valueToSearch'];
+                                $dateOrder = $_POST['date-order'];
+                                echo '<p style="color:white;" > Szukana fraza to:    ' . $valueToSearch . ' <br> Sortuje od:  ' . $dateOrder . ' </p>';
+                            } elseif (isset($_POST['date-from']) && isset($_POST['date-to'])) {
+                                echo '<p style="color:white;" > Sortuje od :    ' . $_POST['date-from'] . ' do:  ' . $_POST['date-to'] . ' </p>';
+                            } else {
+                                $valueToSearch = $_POST['valueToSearch'];
+                                echo '<p style="color:white;" > Szukana fraza to:    ' . $valueToSearch . ' </p>';
+                            }
                         }
                         ?>
                         <input type="text" name="valueToSearch" placeholder="Szukaj" class="form-control"><br>
                         <input type="submit" name="search" value="Szukaj" class="btn btn-primary submit">
                         <a href="./gallery.php" class="btn btn-light">Wyczyść</a>
-
+                        <div class="sorting">
+                            <div class="checkbox">
+                                Sortuj od: <br>
+                                <input type="radio" name="date-order" value="najnowsze" id="new-one">
+                                <label for="new-one">Najnowszy</label><br>
+                                <input type="radio" name="date-order" value="najstarsze" id="old-one">
+                                <label for="old-one">Najstarszy</label>
+                            </div>
+                            <div class="from-to">
+                                Sortuj <br>
+                                Od: <input type="date" name="date-from" id="date-start"><br>
+                                Do: <input type="date" name="date-to" id="date-end">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -150,21 +171,42 @@ session_start();
 
             if (isset($_POST['search'])) {
                 $valueToSearch = $_POST['valueToSearch'];
-                // search in all table columns
-                // using concat mysql function
-                $query = "SELECT * FROM `gallery` WHERE CONCAT(`titleGallery`, `descGallery`) LIKE '%" . $valueToSearch . "%' ORDER BY orderGallery DESC";
-                $search_result = filterTable($query);
+                if (isset($_POST['date-order'])) {
+                    $dateOrder = $_POST['date-order'];
+                    // search in all table columns
+                    // using concat mysql function
+                    if ($dateOrder == 'najnowsze') {
+                        $query = "SELECT * FROM `gallery` WHERE CONCAT(`titleGallery`, `descGallery`) LIKE '%" . $valueToSearch . "%' ORDER BY dateFoto DESC";
+                        $search_result = filterTable($query);
+                    } elseif ($dateOrder == 'najstarsze') {
+                        $query = "SELECT * FROM `gallery` WHERE CONCAT(`titleGallery`, `descGallery`) LIKE '%" . $valueToSearch . "%' ORDER BY dateFoto ";
+                        $search_result = filterTable($query);
+                    }
+                }  elseif (date($_POST['date-from'])) {
+                    $dateFrom = $_POST['date-from'];
+                    $dateTo = $_POST['date-to'];
+    
+                    $query = "SELECT * FROM `gallery` WHERE dateFoto > '$dateFrom' and dateFoto < '$dateTo' ORDER BY dateFoto ";
+                    // $query = "SELECT * FROM `gallery` WHERE dateFoto >'2020-02-02'";
+                    $search_result = filterTable($query);
+                } else {
+                    $query = "SELECT * FROM `gallery` WHERE CONCAT(`titleGallery`, `descGallery`) LIKE '%" . $valueToSearch . "%' ORDER BY orderGallery DESC";
+                    $search_result = filterTable($query);
+                }
+
+               
             } else {
                 $query = "SELECT * FROM `gallery` ORDER BY orderGallery DESC";
                 $search_result = filterTable($query);
             }
 
+
+           
+
             // function to connect and execute the query
             function filterTable($query)
             {
                 include './includes/dbh.inc.php';
-                // $connect = mysqli_connect("host", "user", "pass", "path");
-                // $connect = mysqli_connect("host", "user", "pass", "heroku_e6899dd139aa65d");
                 $filter_Result = mysqli_query($conn, $query);
                 return $filter_Result;
             }
@@ -176,6 +218,7 @@ session_start();
 
 
                 echo '<div class=" col-sm-6 col-md-3 mb-3 item">
+                ' . $row["dateFoto"] . '
                             <a href="./Images/gallery/' . $row["imgFullNameGallery"] . '"; class="fancybox" data-fancybox="gallery1">
                         <img src="./Images/gallery/' . $row["imgFullNameGallery"] . '" width="100%" height="100%" alt="">
                         <h3>' . $row["titleGallery"] . '</h3>
@@ -196,19 +239,21 @@ session_start();
 
         <!-- Upload Section  -->
         <?php
-        if(isset($_SESSION['username'])){
-        if ($_SESSION['username']=='Admin') {
-            echo '<div class="gallery-upload">
+        if (isset($_SESSION['username'])) {
+            if ($_SESSION['username'] == 'Admin') {
+                echo '<div class="gallery-upload">
         <h2>Upload Image</h2>
         <form action="./includes/gallery-upload.inc.php" method="POST" enctype="multipart/form-data">
             <input type="text" name="filename" placeholder="File name...">
             <input type="text" name="filetitle" placeholder="Image title...">
             <input type="text" name="filedesc" placeholder="Image description...">
+            <input type="date" name="dateFoto">
             <input type="file" name="file">
             <button type="submit" name="submit">UPLOAD</button>
         </form>
         </div>';
-        }}
+            }
+        }
 
         ?>
         <!-- End of upload Section  -->

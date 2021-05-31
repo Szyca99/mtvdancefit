@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
     }
     $imageTitle = $_POST['filetitle'];
     $imageDesc = $_POST['filedesc'];
+    $dateFoto = $_POST['dateFoto'];
 
     $file = $_FILES['file'];
     print_r($file);
@@ -50,11 +51,11 @@ if (isset($_POST['submit'])) {
                         $setImageOrder = $rowCount + 1;
 
 
-                        $sql = "INSERT INTO gallery (titleGallery, descGallery, imgFullNameGallery, orderGallery) VALUES (?, ?, ?, ?);";
+                        $sql = "INSERT INTO gallery (titleGallery, descGallery, imgFullNameGallery, orderGallery, dateFoto) VALUES (?, ?, ?, ?, ?);";
                         if(!mysqli_stmt_prepare($stmt, $sql)){
                             echo "SQL statement failed!";
                         } else { 
-                            mysqli_stmt_bind_param($stmt, "ssss", $imageTitle, $imageDesc, $imageFullName, $setImageOrder);
+                            mysqli_stmt_bind_param($stmt, "sssss", $imageTitle, $imageDesc, $imageFullName, $setImageOrder, $dateFoto);
                             mysqli_stmt_execute($stmt);
 
                             move_uploaded_file($fileTempName, $fileDestination);
